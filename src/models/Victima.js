@@ -1,9 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
-import { Task } from "./Task.js";
 
-export const Project = sequelize.define(
-  "projects",
+export const Victima = sequelize.define(
+  "victimas",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,20 +12,18 @@ export const Project = sequelize.define(
     name: {
       type: DataTypes.STRING,
     },
-    priority: {
-      type: DataTypes.INTEGER,
-    },
-    description: {
+    lastname: {
       type: DataTypes.STRING,
     },
+    id_number: {
+      type: DataTypes.INTEGER,
+    },
+    email: {
+      type: DataTypes.STRING,
+    }
   },
   {
     timestamps: false,
   }
 );
 
-Project.hasMany(Task, {
-  foreinkey: "projectId",
-  sourceKey: "id",
-});
-Task.belongsTo(Project, { foreinkey: "projectId", targetId: "id" });
