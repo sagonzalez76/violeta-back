@@ -10,30 +10,59 @@ export async function getIncidentes(req, res) {
     });
   }
 }
-
 export async function createIncidente(req, res) {
-  const { name, lastname, id_number, email } = req.body;
+  const {
+    incidentDate,
+    location,
+    type,
+    description,
+    relationship,
+    previousReports,
+    medicalHelp,
+    legalHelp,
+    consent,
+    contactPreference,
+    victimaId,
+    victimarioId
+  } = req.body;
+
   try {
-    let newIncidente = await Victima.create(
-      {
-        name,
-        lastname,
-        id_number,
-        email
-      },
-      {
-        fields: ["name", "lastname", "id_number", "email"],
-      }
-    );
-    return res.json(newVictima);
+    // Verifica si la víctima y el victimario existen en la base de datos
+    // const victima = await Victima.findByPk(victimaId);
+    // const victimario = victimarioId ? await Victimario.findByPk(victimarioId) : null;
+
+    // if (!victima) {
+    //   return res.status(400).json({ message: 'Víctima no encontrada' });
+    // }
+
+    // if (victimarioId && !victimario) {
+    //   return res.status(400).json({ message: 'Victimario no encontrado' });
+    // }
+
+    // Crea un nuevo incidente
+    const newIncidente = await Incidente.create({
+      incidentDate,
+      location,
+      type,
+      description,
+      relationship,
+      previousReports,
+      medicalHelp,
+      legalHelp,
+      consent,
+      contactPreference,
+      victimaId,
+      victimarioId
+    });
+
+    return res.status(201).json(newIncidente);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
+    console.error('Error al crear el incidente:', error);
+    return res.status(500).json({
+      message: error.message
     });
   }
-  res.json("received");
 }
-
 export async function getVictima(req, res) {
   const { id } = req.params;
   try {

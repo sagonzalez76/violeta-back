@@ -28,9 +28,7 @@ export const Incidente = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aggressor: {
-      type: DataTypes.STRING,
-    },
+
     relationship: {
       type: DataTypes.ENUM,
       values: ["pareja", "expareja", "familiar", "conocido", "desconocido"],
@@ -41,15 +39,15 @@ export const Incidente = sequelize.define(
     },
     medicalHelp: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     legalHelp: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     consent: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     contactPreference: {
       type: DataTypes.ENUM,
