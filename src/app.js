@@ -7,6 +7,10 @@ const app = express();
 
 
 
+// Aplicar la configuración de CORS a todas las rutas
+app.use(cors());
+
+
 // Import routes
 import incidenteRoutes from "./routes/incidente.routes.js";
 import victimaRoutes from "./routes/victimas.routes.js";
